@@ -1,0 +1,50 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int lastAns = 0;
+        int nS = sc.nextInt();
+        int nQ = sc.nextInt();
+        int type,x,y,index;
+
+        ArrayList<Integer>[] seqList = new ArrayList[nS];
+
+        while(nQ-- > 0)
+        {
+            type = sc.nextInt();
+            x    = sc.nextInt();
+            y    = sc.nextInt();
+            index = (x ^ lastAns) % nS;
+
+            switch(type) {
+                case 1:
+                if(seqList[index] == null){
+                    ArrayList<Integer> myList = new ArrayList<>();
+                    myList.add(y);
+                    seqList[index] = myList;
+                }
+                else{
+                    seqList[index].add(y);
+                }
+                break;
+
+                case 2:
+                System.out.println(lastAns = seqList[index].get(y % seqList[index].size()));
+
+                break;
+            } 
+        }
+    }
+}
